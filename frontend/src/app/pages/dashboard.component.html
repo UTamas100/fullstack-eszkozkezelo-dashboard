@@ -1,0 +1,38 @@
+<div class="p-4">
+  <h2>Eszközök</h2>
+
+  <form [formGroup]="deviceForm" (ngSubmit)="addDevice()" class="p-fluid p-grid gap-2">
+    <input type="text" placeholder="name" formControlName="name" pInputText>
+    <input type="text" placeholder="type" formControlName="type" pInputText>
+    <input type="text" placeholder="ip" formControlName="ip" pInputText>
+    <input type="text" placeholder="location" formControlName="location" pInputText>
+    <button pButton label="Hozzáadás" type="submit"></button>
+  </form>
+
+  <p-table [value]="devices" class="mt-4">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th><th>Type</th><th>Status</th><th>Location</th><th>Törlés</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-device>
+      <tr>
+        <td>{{device.name}}</td>
+        <td>{{device.type}}</td>
+        <td>{{device.status}}</td>
+        <td>{{device.location}}</td>
+        <td><button icon="pi pi-trash" class="p-button-danger p-button-rounded p-button-sm" pButton (click)="deleteDevice(device._id)"></button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-chart type="line" [data]="chartData" [options]="chartOptions" width="100%" height="300"></p-chart>
+
+  <button pButton 
+        [label]="'Automatikus frissítés: ' + (autoRefreshEnabled ? 'Be' : 'Ki')"
+        class="my-3"
+        (click)="toggleAutoRefresh()"options
+        icon="pi pi-refresh">
+    </button>
+
+</div>
